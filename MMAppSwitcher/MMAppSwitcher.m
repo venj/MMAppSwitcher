@@ -18,7 +18,6 @@
 @property (nonatomic, weak) id<MMAppSwitcherDataSource> dataSource;
 @property (nonatomic, strong) UIView *view;
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, assign) BOOL showStatusBar;
 
 @end
 
@@ -32,7 +31,6 @@ static MMAppSwitcher *_sharedInstance;
         _sharedInstance = [MMAppSwitcher new];
         _sharedInstance.window = [[UIApplication sharedApplication] delegate].window;
         _sharedInstance.window.backgroundColor = [UIColor clearColor];
-        _sharedInstance.window.windowLevel = UIWindowLevelStatusBar;
     });
     return _sharedInstance;
 }
@@ -81,15 +79,6 @@ static MMAppSwitcher *_sharedInstance;
 
 #pragma mark - Helper methods
 
-- (BOOL)viewControllerBasedStatusBarAppearanceEnabled {
-    CFBooleanRef viewControllerBasedStatusBarAppearance = CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), (CFStringRef)@"UIViewControllerBasedStatusBarAppearance");
-    if (viewControllerBasedStatusBarAppearance==kCFBooleanTrue) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
 - (CGSize)cardSizeForCurrentOrientation {
     CGFloat x, y;
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
@@ -107,15 +96,10 @@ static MMAppSwitcher *_sharedInstance;
 - (void)appWillEnterForeground {
     [self.view removeFromSuperview];
     self.view = nil;
-    [[UIApplication sharedApplication] setStatusBarHidden:self.showStatusBar];
 }
 
 - (void)appDidEnterBackground {
-     self.showStatusBar = [[UIApplication sharedApplication] isStatusBarHidden];
     [self loadCard];
-    if (self.view) {
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    }
 }
 
 @end
