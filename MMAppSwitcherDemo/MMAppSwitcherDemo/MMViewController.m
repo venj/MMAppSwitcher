@@ -136,7 +136,7 @@
 
 #pragma mark - App Switcher Delegate
 
-- (UIView *)appSwitcher:(MMAppSwitcher *)appSwitcher viewForCardWithSize:(CGSize)size {
+- (UIView *)viewForCard {
     if ([self isTracking]) { // checked in
         self.cardView.iconView.highlighted = YES;
         NSDateFormatter *dateFormatter = [NSDateFormatter new];
