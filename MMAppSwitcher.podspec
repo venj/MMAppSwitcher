@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name          = "MMAppSwitcher_Venj"
+  s.name          = "MMAppSwitcher"
   s.version       = "0.3.0"
   s.summary       = "Customize your card view in iOS8's app switcher (multitasking view)"
   s.homepage      = "https://github.com/venj/MMAppSwitcher/"
